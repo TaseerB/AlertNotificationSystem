@@ -6,9 +6,10 @@ module.exports = (router) => {
     try {
         console.info("---- Usersroutes ----");
         router
-            // .get("/users", getUsers)
+            .get("/alertService", alertNotification_1.serviceMonitorAlertGet)
             .post("/alertService", alertNotification_1.serviceMonitorAlertPost);
         // .delete("/users", verify, deleteUser);
+        router.get('/alertServiceid', alertNotification_1.serviceMonitorAlertGetByID);
         // router.post("/update-password", verify);
     }
     catch (e) {

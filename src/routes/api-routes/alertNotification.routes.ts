@@ -2,7 +2,10 @@
 
 // User Controllers
 import {
-	serviceMonitorAlertPost
+	serviceMonitorAlertPost,
+	serviceMonitorAlertPut,
+	serviceMonitorAlertGet,
+	serviceMonitorAlertGetByID,
 } from "../controllers/alertNotification";
 
 
@@ -11,9 +14,11 @@ export = (router: any) => {
 		console.info("---- Usersroutes ----");
 
 		router
-			// .get("/users", getUsers)
+			.get("/alertService", serviceMonitorAlertGet)
 			.post("/alertService", serviceMonitorAlertPost)
 			// .delete("/users", verify, deleteUser);
+
+		router.get('/alertServiceid/{id}', serviceMonitorAlertGetByID)
 
 		// router.post("/update-password", verify);
 	} catch (e) {

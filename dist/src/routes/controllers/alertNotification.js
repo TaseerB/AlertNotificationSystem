@@ -9,12 +9,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.serviceMonitorAlertPost = void 0;
+exports.serviceMonitorAlertPut = exports.serviceMonitorAlertGetByID = exports.serviceMonitorAlertGet = exports.serviceMonitorAlertPost = void 0;
 const alertNotification_service_1 = require("../../service/alertNotification.service");
 const serviceMonitorAlertPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.info('-- Service Monitor Alert Posting --');
     const newAlert = req === null || req === void 0 ? void 0 : req.body;
-    console.info({ newAlert });
     const alert = yield (0, alertNotification_service_1.createAlert)(newAlert);
+    const sendNotification = yield (0, alertNotification_service_1.sendNotifications)(alert);
+    // We will use AWS-SQS service for 15 min time check whenever an alert will be generated
+    // we will push data to SQS to hit our route after 15 to check for 
+    res.status(201).send({
+        message: 'Alert Notification sent'
+    });
 });
 exports.serviceMonitorAlertPost = serviceMonitorAlertPost;
+const serviceMonitorAlertGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.info('-- Service Monitor Alert Get --');
+        const alerts = yield (0, alertNotification_service_1.getAlerts)();
+        res.status(200).send(alerts);
+    }
+    catch (err) {
+        console.error(err);
+    }
+});
+exports.serviceMonitorAlertGet = serviceMonitorAlertGet;
+const serviceMonitorAlertGetByID = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.info({ id: req });
+    // const alert = await getAlertByID(alertByID);
+});
+exports.serviceMonitorAlertGetByID = serviceMonitorAlertGetByID;
+const serviceMonitorAlertPut = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+exports.serviceMonitorAlertPut = serviceMonitorAlertPut;

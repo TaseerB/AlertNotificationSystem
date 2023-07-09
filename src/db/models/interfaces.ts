@@ -6,6 +6,7 @@ export interface ServiceMonitorInterface {
 	alertMessage: string;
 	serviceIdentifier: string;
 	alertTime: Date;
+	state: string;
 	createdBy: string;
 	updatedBy: string;
 }

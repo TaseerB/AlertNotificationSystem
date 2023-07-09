@@ -12,10 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createAlert = void 0;
+exports.sendNotifications = exports.getAlertByID = exports.getAlerts = exports.createAlert = void 0;
 const serviceMonitor_1 = __importDefault(require("../db/models/serviceMonitor"));
 const createAlert = (createAlert) => __awaiter(void 0, void 0, void 0, function* () {
-    console.info({ createAlert });
-    return serviceMonitor_1.default.create({ createAlert });
+    const { alertMessage, serviceIdentifier, alertTime, } = createAlert;
+    return serviceMonitor_1.default.create({
+        alertMessage,
+        serviceIdentifier,
+        alertTime,
+        state: 'unHealthy',
+    });
+    /*
+    We will implement a cron based solution here for 15 min check of alert services for each alert
+    */
 });
 exports.createAlert = createAlert;
+const getAlerts = () => __awaiter(void 0, void 0, void 0, function* () {
+    return serviceMonitor_1.default.findAll();
+});
+exports.getAlerts = getAlerts;
+const getAlertByID = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return serviceMonitor_1.default.findByPk(id);
+});
+exports.getAlertByID = getAlertByID;
+const sendNotifications = (alertData) => __awaiter(void 0, void 0, void 0, function* () {
+    // Send Email + Phone Notification from here
+});
+exports.sendNotifications = sendNotifications;

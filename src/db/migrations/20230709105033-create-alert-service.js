@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('alertServices', {
+    await queryInterface.createTable('ServiceMonitors', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,8 +15,11 @@ module.exports = {
       serviceIdentifier: {
         type: Sequelize.STRING
       },
-      alertMessage: {
+      state: {
         type: Sequelize.STRING
+      },
+      alertTime: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +32,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('alertServices');
+    await queryInterface.dropTable('ServiceMonitors');
   }
 };

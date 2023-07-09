@@ -18,6 +18,9 @@ ServiceMonitor.init(
 			autoIncrement: true,
 			primaryKey: true,
 		},
+		state: {
+			type: DataTypes.STRING,
+		},
 		alertMessage: {
 			type: DataTypes.STRING,
 		},
@@ -25,18 +28,13 @@ ServiceMonitor.init(
 			type: DataTypes.STRING,
 		},
     alertTime: {
+			allowNull: true,
 			type: DataTypes.DATE,
-		},
-    createdBy: {
-			type: DataTypes.STRING,
-		},
-    updatedBy: {
-			type: DataTypes.STRING,
 		},
 	},
 	{
 		sequelize,
-		modelName: "service_monitor",
+		modelName: "ServiceMonitors",
 	}
 );
 
