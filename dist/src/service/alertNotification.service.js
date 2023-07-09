@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendNotifications = exports.getAlertByID = exports.getAlerts = exports.createAlert = void 0;
+exports.updateAlert = exports.sendNotifications = exports.getAlertByID = exports.getAlerts = exports.createAlert = void 0;
 const serviceMonitor_1 = __importDefault(require("../db/models/serviceMonitor"));
 const createAlert = (createAlert) => __awaiter(void 0, void 0, void 0, function* () {
     const { alertMessage, serviceIdentifier, alertTime, } = createAlert;
@@ -39,3 +39,7 @@ const sendNotifications = (alertData) => __awaiter(void 0, void 0, void 0, funct
     // Send Email + Phone Notification from here
 });
 exports.sendNotifications = sendNotifications;
+const updateAlert = (updateData) => __awaiter(void 0, void 0, void 0, function* () {
+    // check the system health status and update the alert accordingly 
+});
+exports.updateAlert = updateAlert;

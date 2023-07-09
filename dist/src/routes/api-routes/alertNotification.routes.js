@@ -9,7 +9,7 @@ module.exports = (router) => {
             .get("/alertService", alertNotification_1.serviceMonitorAlertGet)
             .post("/alertService", alertNotification_1.serviceMonitorAlertPost);
         // .delete("/users", verify, deleteUser);
-        router.get('/alertServiceid', alertNotification_1.serviceMonitorAlertGetByID);
+        router.get('/alertServiceid/{id}', alertNotification_1.serviceMonitorAlertGetByID);
         // router.post("/update-password", verify);
     }
     catch (e) {
